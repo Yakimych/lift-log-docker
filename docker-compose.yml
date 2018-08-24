@@ -1,0 +1,24 @@
+version: "3"
+services:
+  webapi:
+    image: yakimych/lift-log-web-api
+    restart: always
+    expose:
+      - "80"
+    depends_on:
+      - mongodbserver
+
+  mongodbserver:
+    image: mongo
+    restart: always
+    volumes:
+      - '/my/own/datadir:/data/db'
+
+  proxy:
+    build:
+      context: ./nginx
+      dockerfile: Dockerfile
+    ports:
+      - "8081:8081"
+    links:
+      - webapi
