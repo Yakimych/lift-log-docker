@@ -18,6 +18,8 @@ services:
     build:
       context: ./nginx
       dockerfile: Dockerfile
+    volumes:
+      - './frontend:/data/frontend'
     ports:
       - "8081:8081"
     links:
