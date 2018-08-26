@@ -12,7 +12,7 @@ services:
     image: mongo
     restart: always
     volumes:
-      - '/my/own/datadir:/data/db'
+      - './mongodb:/data/db' # ./mongodb is the directory on the host machine
 
   proxy:
     build:
@@ -21,6 +21,6 @@ services:
     volumes:
       - './frontend:/data/frontend'
     ports:
-      - "8081:8081"
+      - "80:80"
     links:
       - webapi
